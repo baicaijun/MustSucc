@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nox.dao.IcasestepDao" >
+  <resultMap id="BaseResultMap" type="com.nox.domain.casestepEntity" >
+    <id column="id" property="id" />
+    <result column="testcasename" property="testcasename"  />
+    <result column="testcaseid" property="testcaseid" /> 
+    <result column="stepPath" property="stepPath" /> 
+    <result column="stepName" property="stepName" /> 
+    <result column="casestep_element" property="casestep_element" /> 
+   
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,testcasename,testcaseid,stepPath,stepName,casestep_element
+  </sql>
+  <select id="selectCaseStepCaseName" resultMap="BaseResultMap">
+    select 
+   *
+    from casestep
+    where testcasename = #{testcasename} order by stepPath
+  </select>
+  
+  <insert id="insertCaseStep"  parameterType="com.nox.domain.casestepEntity" useGeneratedKeys="true" keyProperty="id">
+    insert into casestep (testcaseid,testcasename,stepPath,stepName,casestep_element)
+    values (#{testcaseid}, #{testcasename}, #{stepPath}, #{stepName}, #{casestep_element})  
+  </insert>
+
+</mapper>

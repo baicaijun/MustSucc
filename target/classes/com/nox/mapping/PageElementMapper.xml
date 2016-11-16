@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nox.dao.IPageElementDao" >
+  <resultMap id="BaseResultMap" type="com.nox.domain.PageElementEntity" >
+    <id column="id" property="id" />
+    <result column="page_id" property="page_id"  />
+    <result column="elementType" property="elementType" /> 
+    <result column="ElementPath" property="ElementPath" /> 
+    <result column="element_name" property="element_name"  />
+     <result column="page_name" property="page_name"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,page_id,elementType,ElementPath, element_name, page_name
+  </sql>
+  <select id="selectElementByPageName" resultMap="BaseResultMap">
+    select 
+   *
+    from page_element
+    where page_name = #{page_name}
+  </select>
+   <select id="selectElementByName" resultMap="BaseResultMap">
+    select 
+    *
+    from page_element
+    where element_name = #{element_name}
+  </select>
+  <insert id="insertPageElement"  parameterType="com.nox.domain.PageElementEntity" useGeneratedKeys="true" keyProperty="id">
+    insert into page_element (page_id,elementType,ElementPath,element_name,page_name)
+    values (#{page_id}, #{elementType}, #{ElementPath}, #{element_name},#{page_name})  
+  </insert>
+ 
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nox.dao.IPageDao" >
+  <resultMap id="BaseResultMap" type="com.nox.domain.PageEntity" >
+    <id column="id" property="id" />
+    <result column="project_id" property="project_id"  />
+    <result column="page_name" property="page_name" /> 
+    <result column="page_url" property="page_url" /> 
+    <result column="project_name" property="project_name"  />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id,project_id,page_name,page_url, project_name
+  </sql>
+  <select id="selectPageByPageName" resultMap="BaseResultMap">
+    select 
+   *
+    from auto_page
+    where page_name = #{page_name}
+  </select>
+   <select id="selectPageByProject" resultMap="BaseResultMap">
+    select 
+    *
+    from auto_page
+    where project_name = #{project_name}
+  </select>
+  <insert id="insertPage"  parameterType="com.nox.domain.PageEntity" useGeneratedKeys="true" keyProperty="id">
+    insert into auto_page (project_id,page_name,page_url,project_name)
+    values (#{project_id}, #{page_name}, #{page_url}, #{project_name})  
+  </insert>
+ 
+</mapper>
